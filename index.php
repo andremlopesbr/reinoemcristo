@@ -363,15 +363,17 @@
             startBtn.addEventListener('click', () => {
                 currentSlide = 1;
                 showSlide(currentSlide);
-                appHeader.classList.remove('hidden');
-                navigation.classList.remove('hidden');
+                appHeader.style.display = 'flex';
+                navigation.style.display = 'flex';
+                console.log('Navigation and Header shown via direct style manipulation.');
             });
 
             restartBtn.addEventListener('click', () => {
                 currentSlide = 0;
                 showSlide(currentSlide);
-                appHeader.classList.add('hidden');
-                navigation.classList.add('hidden');
+                appHeader.style.display = 'none';
+                navigation.style.display = 'none';
+                console.log('Navigation and Header hidden via direct style manipulation.');
             });
 
             nextBtn.addEventListener('click', next);
