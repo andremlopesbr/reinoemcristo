@@ -348,7 +348,7 @@
         </div>
     </main>
 
-    <footer id="navigation" class="bg-white/70 backdrop-blur-md shadow-inner z-20 p-2 hidden flex-shrink-0">
+    <footer id="navigation" class="bg-white/70 backdrop-blur-md shadow-inner p-2 hidden flex-shrink-0">
         <div class="mx-auto flex items-center justify-center space-x-4">
             <button id="prevBtn" class="bg-white/60 backdrop-blur-sm p-3 rounded-full shadow-lg hover:bg-white transition-transform transform hover:scale-110">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-700">
@@ -404,6 +404,15 @@
                     // swipeHintRight.style.bottom = `${footerHeight + 20}px`; // Removed, handled by CSS
                 }
             }
+
+            function adjustMainContentPadding() {
+                const footerHeight = navigation.offsetHeight;
+                mainContent.style.paddingBottom = `${footerHeight}px`;
+            }
+
+            // Call adjustMainContentPadding initially and on resize
+            adjustMainContentPadding();
+            window.addEventListener('resize', adjustMainContentPadding);
 
             let currentSlide = 0;
             const totalPresentationSlides = slides.length - 1; // Total de slides da apresentação (ignora o slide 0)
