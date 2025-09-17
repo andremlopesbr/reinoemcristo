@@ -375,6 +375,7 @@
                 // We execute the same code as above
                 let vh = window.innerHeight * 0.01;
                 document.documentElement.style.setProperty('--vh', `${vh}px`);
+                positionScrollHints(); // Adicionado para posicionar o scroll hint
             });
             const mainContent = document.querySelector('main');
             const slides = document.querySelectorAll('.slide');
@@ -473,6 +474,7 @@
                     slideIndicator.textContent = `${index} / ${totalPresentationSlides}`;
                 }
                 updateHeader(index);
+                positionScrollHints(); // Adicionado para posicionar o scroll hint
                 checkScroll();
                 if (isMobileDevice()) {
                     showSwipeHints(); // Call to show swipe hints
