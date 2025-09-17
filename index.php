@@ -27,6 +27,12 @@
             transform: scale(0.95);
             pointer-events: none;
             /* Desabilita interação com slides escondidos */
+            overflow-y: auto;
+            /* Permite rolagem vertical se o conteúdo for muito alto */
+            padding-top: 1rem;
+            /* Adiciona um respiro no topo */
+            padding-bottom: 5rem;
+            /* Adiciona espaço para o conteúdo não colar no botão de navegação */
         }
 
         .slide.active {
@@ -48,10 +54,10 @@
     <main class="relative w-full h-screen">
         <!-- Slide 0: Tela de Boas-Vindas -->
         <div id="slide-0" class="slide active flex flex-col items-center justify-center p-4">
-            <div class="text-center bg-white/50 backdrop-blur-md p-8 md:p-12 rounded-2xl shadow-2xl max-w-2xl">
-                <h1 class="text-6xl md:text-8xl font-bold text-yellow-500 drop-shadow-lg">👑</h1>
-                <h2 class="text-3xl md:text-5xl font-bold text-indigo-700 mt-4">Reino em Cristo Kids</h2>
-                <p class="text-lg md:text-xl mt-2 text-slate-600">Ministério Infantil da Igreja Reino em Cristo – Belém/PA</p>
+            <div class="text-center bg-white/50 backdrop-blur-md p-6 sm:p-8 md:p-12 rounded-2xl shadow-2xl w-full max-w-2xl lg:max-w-3xl mx-4">
+                <h1 class="text-5xl sm:text-6xl md:text-8xl font-bold text-yellow-500 drop-shadow-lg">👑</h1>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-indigo-700 mt-4">Reino em Cristo Kids</h2>
+                <p class="text-base sm:text-lg md:text-xl mt-2 text-slate-600">Ministério Infantil da Igreja Reino em Cristo – Belém/PA</p>
                 <button id="startBtn" class="mt-8 bg-indigo-600 text-white font-bold py-3 px-8 rounded-full hover:bg-indigo-700 transition-transform transform hover:scale-105 btn-glow">
                     Iniciar Apresentação
                 </button>
@@ -60,9 +66,9 @@
 
         <!-- Slide 1: Missão -->
         <div id="slide-1" class="slide flex flex-col items-center justify-center p-4">
-            <div class="text-center bg-white/50 backdrop-blur-md p-8 md:p-12 rounded-2xl shadow-2xl max-w-3xl">
-                <h2 class="text-4xl md:text-5xl font-bold text-indigo-700 mb-6">🎯 Nossa Missão</h2>
-                <p class="text-xl md:text-2xl leading-relaxed text-slate-700">
+            <div class="text-center bg-white/50 backdrop-blur-md p-6 sm:p-8 md:p-12 rounded-2xl shadow-2xl w-full max-w-3xl lg:max-w-4xl mx-4">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-indigo-700 mb-6">🎯 Nossa Missão</h2>
+                <p class="text-lg sm:text-xl md:text-2xl leading-relaxed text-slate-700">
                     Formar uma geração de crianças apaixonadas por Deus, que conhecem a Sua Palavra, vivem os valores do Reino e crescem conscientes do seu chamado e identidade profética.
                 </p>
             </div>
@@ -70,9 +76,9 @@
 
         <!-- Slide 2: Visão -->
         <div id="slide-2" class="slide flex flex-col items-center justify-center p-4">
-            <div class="bg-white/50 backdrop-blur-md p-8 md:p-12 rounded-2xl shadow-2xl max-w-4xl w-full">
-                <h2 class="text-4xl md:text-5xl font-bold text-indigo-700 mb-8 text-center">🌟 Nossa Visão</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-lg text-slate-700">
+            <div class="bg-white/50 backdrop-blur-md p-6 sm:p-8 md:p-12 rounded-2xl shadow-2xl w-full max-w-4xl lg:max-w-5xl mx-4">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-indigo-700 mb-8 text-center">🌟 Nossa Visão</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-base sm:text-lg text-slate-700">
                     <div class="flex items-center space-x-3"><span class="text-2xl">💝</span><span>Amam a presença de Deus</span></div>
                     <div class="flex items-center space-x-3"><span class="text-2xl">📖</span><span>Conhecem e praticam a Palavra</span></div>
                     <div class="flex items-center space-x-3"><span class="text-2xl">😊</span><span>Servem com alegria</span></div>
@@ -81,16 +87,16 @@
                     <div class="flex items-center space-x-3"><span class="text-2xl">💭</span><span>Sonham os sonhos do Pai</span></div>
                     <div class="flex items-center space-x-3 md:col-span-2 lg:col-span-1"><span class="text-2xl">😍</span><span>Ajudam os amiguinhos</span></div>
                 </div>
-                <p class="mt-8 text-center text-xl text-slate-800 italic">"Queremos ver meninos e meninas como verdadeiros missionários em sua casa, escola e onde estiverem. 🕊️"</p>
+                <p class="mt-8 text-center text-lg sm:text-xl text-slate-800 italic">"Queremos ver meninos e meninas como verdadeiros missionários em sua casa, escola e onde estiverem. 🕊️"</p>
             </div>
         </div>
 
         <!-- Slide 3: Quem Somos -->
         <div id="slide-3" class="slide flex flex-col items-center justify-center p-4">
-            <div class="bg-white/50 backdrop-blur-md p-8 md:p-12 rounded-2xl shadow-2xl max-w-4xl w-full">
-                <h2 class="text-4xl md:text-5xl font-bold text-indigo-700 mb-6 text-center">🏰 Quem Somos</h2>
-                <p class="text-center text-xl mb-8 text-slate-700">O Reino em Cristo Kids é mais que um ministério: é uma família espiritual para as crianças da igreja, onde elas:</p>
-                <ul class="space-y-4 text-lg text-left">
+            <div class="bg-white/50 backdrop-blur-md p-6 sm:p-8 md:p-12 rounded-2xl shadow-2xl w-full max-w-4xl lg:max-w-5xl mx-4">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-indigo-700 mb-6 text-center">🏰 Quem Somos</h2>
+                <p class="text-center text-lg sm:text-xl mb-8 text-slate-700">O Reino em Cristo Kids é mais que um ministério: é uma família espiritual para as crianças da igreja, onde elas:</p>
+                <ul class="space-y-4 text-base sm:text-lg text-left">
                     <li class="flex items-start space-x-4"><span class="text-3xl mt-1">✨</span><span><span class="font-semibold">Aprendem a Bíblia</span> de forma lúdica e profunda.</span></li>
                     <li class="flex items-start space-x-4"><span class="text-3xl mt-1">🙏</span><span><span class="font-semibold">Participam de planos devocionais</span> e momentos de intercessão.</span></li>
                     <li class="flex items-start space-x-4"><span class="text-3xl mt-1">🎁</span><span><span class="font-semibold">Desenvolvem dons</span> e descobrem seu propósito.</span></li>
@@ -102,8 +108,8 @@
 
         <!-- Slide 4: Faixas Etárias -->
         <div id="slide-4" class="slide flex flex-col items-center justify-center p-4">
-            <div class="bg-white/50 backdrop-blur-md p-8 md:p-12 rounded-2xl shadow-2xl w-full max-w-5xl">
-                <h2 class="text-4xl md:text-5xl font-bold text-indigo-700 mb-8 text-center">🧒👧 Faixas Etárias</h2>
+            <div class="bg-white/50 backdrop-blur-md p-6 sm:p-8 md:p-12 rounded-2xl shadow-2xl w-full max-w-5xl lg:max-w-6xl mx-4">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-indigo-700 mb-8 text-center">🧒👧 Faixas Etárias</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <!-- Card 1 -->
                     <div class="bg-sky-100 p-6 rounded-xl text-center border-2 border-sky-300 transform hover:scale-105 transition-transform">
@@ -133,9 +139,9 @@
 
         <!-- Slide 5: Elementos-Chave -->
         <div id="slide-5" class="slide flex flex-col items-center justify-center p-4">
-            <div class="bg-white/50 backdrop-blur-md p-8 md:p-12 rounded-2xl shadow-2xl max-w-4xl w-full">
-                <h2 class="text-4xl md:text-5xl font-bold text-indigo-700 mb-8 text-center">🛡️ Elementos-chave do Ministério</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 text-lg">
+            <div class="bg-white/50 backdrop-blur-md p-6 sm:p-8 md:p-12 rounded-2xl shadow-2xl w-full max-w-4xl lg:max-w-5xl mx-4">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-indigo-700 mb-8 text-center">🛡️ Elementos-chave do Ministério</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 text-base sm:text-lg">
                     <div class="flex items-center space-x-3"><span class="text-3xl">🎵</span><span>Louvor e adoração genuína</span></div>
                     <div class="flex items-center space-x-3"><span class="text-3xl">🙏</span><span>Oração, intercessão e dons</span></div>
                     <div class="flex items-center space-x-3"><span class="text-3xl">💞</span><span>Dinâmica Do Reino</span></div>
@@ -148,32 +154,32 @@
 
         <!-- Slide 6: Frutos Esperados -->
         <div id="slide-6" class="slide flex flex-col items-center justify-center p-4">
-            <div class="bg-white/50 backdrop-blur-md p-8 md:p-12 rounded-2xl shadow-2xl max-w-5xl w-full">
-                <h2 class="text-4xl md:text-5xl font-bold text-indigo-700 mb-8 text-center">🎁 Frutos que Esperamos</h2>
+            <div class="bg-white/50 backdrop-blur-md p-6 sm:p-8 md:p-12 rounded-2xl shadow-2xl w-full max-w-5xl lg:max-w-6xl mx-4">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-indigo-700 mb-8 text-center">🎁 Frutos que Esperamos</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
                     <div>
-                        <h3 class="font-bold text-lg text-emerald-700">✔️ Têm prazer na presença de Deus</h3>
-                        <p class="text-slate-600 ml-5">Desenvolvendo intimidade com o Pai celestial.</p>
+                        <h3 class="font-bold text-base sm:text-lg text-emerald-700">✔️ Têm prazer na presença de Deus</h3>
+                        <p class="text-slate-600 ml-5 text-sm sm:text-base">Desenvolvendo intimidade com o Pai celestial.</p>
                     </div>
                     <div>
-                        <h3 class="font-bold text-lg text-emerald-700">✔️ Se tornam constantes na leitura da Palavra</h3>
-                        <p class="text-slate-600 ml-5">Criando o hábito da leitura bíblica diária.</p>
+                        <h3 class="font-bold text-base sm:text-lg text-emerald-700">✔️ Se tornam constantes na leitura da Palavra</h3>
+                        <p class="text-slate-600 ml-5 text-sm sm:text-base">Criando o hábito da leitura bíblica diária.</p>
                     </div>
                     <div>
-                        <h3 class="font-bold text-lg text-emerald-700">✔️ Servem com responsabilidade</h3>
-                        <p class="text-slate-600 ml-5">Aprendendo a servir ao próximo com amor.</p>
+                        <h3 class="font-bold text-base sm:text-lg text-emerald-700">✔️ Servem com responsabilidade</h3>
+                        <p class="text-slate-600 ml-5 text-sm sm:text-base">Aprendendo a servir ao próximo com amor.</p>
                     </div>
                     <div>
-                        <h3 class="font-bold text-lg text-emerald-700">✔️ Reconhecem sua identidade como filhos do Rei</h3>
-                        <p class="text-slate-600 ml-5">Compreendendo sua posição no Reino de Deus.</p>
+                        <h3 class="font-bold text-base sm:text-lg text-emerald-700">✔️ Reconhecem sua identidade como filhos do Rei</h3>
+                        <p class="text-slate-600 ml-5 text-sm sm:text-base">Compreendendo sua posição no Reino de Deus.</p>
                     </div>
                     <div>
-                        <h3 class="font-bold text-lg text-emerald-700">✔️ Carregam um testemunho profético</h3>
-                        <p class="text-slate-600 ml-5">Sendo luz onde estiverem.</p>
+                        <h3 class="font-bold text-base sm:text-lg text-emerald-700">✔️ Carregam um testemunho profético</h3>
+                        <p class="text-slate-600 ml-5 text-sm sm:text-base">Sendo luz onde estiverem.</p>
                     </div>
                     <div>
-                        <h3 class="font-bold text-lg text-emerald-700">✔️ Respeitam o próximo</h3>
-                        <p class="text-slate-600 ml-5">Sendo exemplos por onde estiverem.</p>
+                        <h3 class="font-bold text-base sm:text-lg text-emerald-700">✔️ Respeitam o próximo</h3>
+                        <p class="text-slate-600 ml-5 text-sm sm:text-base">Sendo exemplos por onde estiverem.</p>
                     </div>
                 </div>
             </div>
@@ -181,12 +187,12 @@
 
         <!-- Slide 7: Venha fazer parte! -->
         <div id="slide-7" class="slide flex flex-col items-center justify-center p-4">
-            <div class="text-center bg-white/50 backdrop-blur-md p-8 md:p-12 rounded-2xl shadow-2xl max-w-3xl">
-                <h2 class="text-4xl md:text-5xl font-bold text-indigo-700 mb-6">🌈 Venha fazer parte!</h2>
-                <p class="text-lg md:text-xl leading-relaxed text-slate-700">
+            <div class="text-center bg-white/50 backdrop-blur-md p-6 sm:p-8 md:p-12 rounded-2xl shadow-2xl w-full max-w-3xl lg:max-w-4xl mx-4">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-indigo-700 mb-6">🌈 Venha fazer parte!</h2>
+                <p class="text-lg sm:text-xl md:text-2xl leading-relaxed text-slate-700">
                     O Reino em Cristo Kids está de portas abertas para receber sua criança em um ambiente de amor, ensino e crescimento espiritual. Juntos, vamos formar uma geração que conhece a Deus e vive para Sua glória!
                 </p>
-                <p class="text-md md:text-lg italic mt-8 text-slate-600">"Deixai vir a mim as criancinhas e não as impeçais, porque delas é o Reino de Deus." - Lucas 18:16</p>
+                <p class="text-sm sm:text-md md:text-lg italic mt-8 text-slate-600">"Deixai vir a mim as criancinhas e não as impeçais, porque delas é o Reino de Deus." - Lucas 18:16</p>
                 <button id="restartBtn" class="mt-8 bg-amber-500 text-white font-bold py-3 px-8 rounded-full hover:bg-amber-600 transition-transform transform hover:scale-105 btn-glow">
                     Reiniciar
                 </button>
