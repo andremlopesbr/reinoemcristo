@@ -390,6 +390,39 @@
                 }
             });
 
+            // Swipe gestures for mobile
+            let touchStartX = 0;
+            let touchStartY = 0;
+            const swipeThreshold = 50; // Minimum horizontal distance for a swipe
+            const verticalThreshold = 30; // Maximum vertical movement allowed for a horizontal swipe
+
+            mainContent.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+            });
+
+            mainContent.addEventListener('touchmove', (e) => {
+                // Prevent vertical scrolling if a horizontal swipe is detected early
+                // This might be too aggressive, let's refine in touchend
+            });
+
+            mainContent.addEventListener('touchend', (e) => {
+                const touchEndX = e.changedTouches[0].clientX;
+                const touchEndY = e.changedTouches[0].clientY;
+
+                const deltaX = touchEndX - touchStartX;
+                const deltaY = touchEndY - touchStartY;
+
+                // Check if it's primarily a horizontal swipe and exceeds the threshold
+                if (Math.abs(deltaX) > swipeThreshold && Math.abs(deltaY) < verticalThreshold) {
+                    if (deltaX > 0) { // Swiped right
+                        prev();
+                    } else { // Swiped left
+                        next();
+                    }
+                }
+            });
+
             showSlide(0);
         });
     </script>
