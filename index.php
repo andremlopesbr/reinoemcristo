@@ -30,7 +30,6 @@
 
         @media (max-width: 768px) { /* Apply these styles only on mobile devices */
             body {
-                overflow: hidden;
                 height: 100vh;
                 /* Fallback for browsers that don't support custom properties or JS */
                 height: calc(var(--vh, 1vh) * 100);
@@ -532,8 +531,16 @@
             });
 
             mainContent.addEventListener('touchmove', (e) => {
-                // Prevent vertical scrolling if a horizontal swipe is detected early
-                // This might be too aggressive, let's refine in touchend
+                const touchCurrentX = e.touches[0].clientX;
+                const touchCurrentY = e.touches[0].clientY;
+
+                const deltaX = touchCurrentX - touchStartX;
+                const deltaY = touchCurrentY - touchStartY;
+
+                // Se o movimento for predominantemente horizontal e exceder um pequeno limiar, previne a rolagem vertical
+                if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 10) { // Limiar de 10px para evitar acionamento acidental
+                    e.preventDefault();
+                }
             });
 
             mainContent.addEventListener('touchend', (e) => {
