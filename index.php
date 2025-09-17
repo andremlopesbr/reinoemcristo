@@ -14,7 +14,6 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        /* Oculta a barra de rolagem principal, mas permite rolagem no main */
         html,
         body {
             overflow: hidden;
@@ -31,26 +30,63 @@
             opacity: 0;
             transform: scale(0.98);
             display: none;
-            /* Inicia escondido */
         }
 
         .slide.active {
             opacity: 1;
             transform: scale(1);
             display: flex;
-            /* Mostra como flexbox quando ativo */
         }
 
-        /* Efeito de brilho sutil nos botões */
         .btn-glow {
             box-shadow: 0 0 5px rgba(255, 255, 255, 0.7), 0 0 10px rgba(147, 197, 253, 0.5);
+        }
+
+        @keyframes bounce-and-fade {
+            0%, 100% {
+                transform: translateY(0);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateY(-15px);
+                opacity: 1;
+            }
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 6rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .scroll-hint.visible {
+            opacity: 1;
+        }
+
+        .scroll-hint-icon {
+            width: 48px;
+            height: 48px;
+            background-color: rgba(26, 32, 44, 0.6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: bounce-and-fade 2.5s infinite;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
 
 <body class="bg-gradient-to-br from-sky-200 via-blue-300 to-indigo-400 text-slate-800 flex flex-col h-screen">
 
-    <!-- Cabeçalho Fixo -->
     <header id="app-header" class="bg-white/70 backdrop-blur-md shadow-lg z-20 hidden">
         <div class="mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
             <h1 class="text-xl sm:text-2xl font-bold text-indigo-700">Reino em Cristo Kids</h1>
@@ -58,8 +94,7 @@
         </div>
     </header>
 
-    <!-- Conteúdo Principal com Rolagem -->
-    <main class="flex-grow w-full">
+    <main class="flex-grow w-full relative">
         <!-- Slide 0: Tela de Boas-Vindas -->
         <div id="slide-0" data-title="Bem-vindos!" class="slide active h-full flex-col items-center justify-center p-4">
             <div class="text-center bg-white/50 backdrop-blur-md p-6 sm:p-8 md:p-12 rounded-2xl shadow-2xl w-full max-w-2xl lg:max-w-3xl mx-4">
@@ -72,8 +107,8 @@
             </div>
         </div>
 
-        <!-- Slide 1: Missão -->
-        <div id="slide-1" data-title="🎯 Nossa Missão" class="slide h-full flex-col items-center justify-center p-4">
+        <!-- Slides da Apresentação -->
+        <div id="slide-1" data-title="🎯 Nossa Missão" class="slide min-h-full flex-col items-center justify-center p-4">
             <div class="text-center bg-white/50 backdrop-blur-md p-6 sm:p-8 md:p-12 rounded-2xl shadow-2xl w-full max-w-3xl lg:max-w-4xl mx-4">
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-indigo-700 mb-6">🎯 Nossa Missão</h2>
                 <p class="text-lg sm:text-xl md:text-2xl leading-relaxed text-slate-700">
@@ -82,8 +117,7 @@
             </div>
         </div>
 
-        <!-- Slide 2: Visão -->
-        <div id="slide-2" data-title="🌟 Nossa Visão" class="slide h-full flex-col items-center justify-center p-4">
+        <div id="slide-2" data-title="🌟 Nossa Visão" class="slide min-h-full flex-col items-center justify-center p-4">
             <div class="bg-white/50 backdrop-blur-md p-6 sm:p-8 md:p-12 rounded-2xl shadow-2xl w-full max-w-4xl lg:max-w-5xl mx-4">
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-indigo-700 mb-8 text-center">🌟 Nossa Visão</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-base sm:text-lg text-slate-700">
@@ -99,8 +133,7 @@
             </div>
         </div>
 
-        <!-- Slide 3: Quem Somos -->
-        <div id="slide-3" data-title="🏰 Quem Somos" class="slide h-full flex-col items-center justify-center p-4">
+        <div id="slide-3" data-title="🏰 Quem Somos" class="slide min-h-full flex-col items-center justify-center p-4">
             <div class="bg-white/50 backdrop-blur-md p-6 sm:p-8 md:p-12 rounded-2xl shadow-2xl w-full max-w-4xl lg:max-w-5xl mx-4">
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-indigo-700 mb-6 text-center">🏰 Quem Somos</h2>
                 <p class="text-center text-lg sm:text-xl mb-8 text-slate-700">O Reino em Cristo Kids é mais que um ministério: é uma família espiritual para as crianças da igreja, onde elas:</p>
@@ -114,8 +147,7 @@
             </div>
         </div>
 
-        <!-- Slide 4: Faixas Etárias -->
-        <div id="slide-4" data-title="🧒👧 Faixas Etárias" class="slide h-full flex-col items-center justify-center p-4">
+        <div id="slide-4" data-title="🧒👧 Faixas Etárias" class="slide min-h-full flex-col items-center justify-center p-4">
             <div class="bg-white/50 backdrop-blur-md p-6 sm:p-8 md:p-12 rounded-2xl shadow-2xl w-full max-w-5xl lg:max-w-6xl mx-4">
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-indigo-700 mb-8 text-center">🧒👧 Faixas Etárias</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -142,8 +174,7 @@
             </div>
         </div>
 
-        <!-- Slide 5: Elementos-Chave -->
-        <div id="slide-5" data-title="🛡️ Elementos-chave" class="slide h-full flex-col items-center justify-center p-4">
+        <div id="slide-5" data-title="🛡️ Elementos-chave" class="slide min-h-full flex-col items-center justify-center p-4">
             <div class="bg-white/50 backdrop-blur-md p-6 sm:p-8 md:p-12 rounded-2xl shadow-2xl w-full max-w-4xl lg:max-w-5xl mx-4">
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-indigo-700 mb-8 text-center">🛡️ Elementos-chave do Ministério</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 text-base sm:text-lg">
@@ -157,8 +188,7 @@
             </div>
         </div>
 
-        <!-- Slide 6: Frutos Esperados -->
-        <div id="slide-6" data-title="🎁 Frutos Esperados" class="slide h-full flex-col items-center justify-center p-4">
+        <div id="slide-6" data-title="🎁 Frutos Esperados" class="slide min-h-full flex-col items-center justify-center p-4">
             <div class="bg-white/50 backdrop-blur-md p-6 sm:p-8 md:p-12 rounded-2xl shadow-2xl w-full max-w-5xl lg:max-w-6xl mx-4">
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-indigo-700 mb-8 text-center">🎁 Frutos que Esperamos</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
@@ -190,8 +220,7 @@
             </div>
         </div>
 
-        <!-- Slide 7: Venha fazer parte! -->
-        <div id="slide-7" data-title="🌈 Venha fazer parte!" class="slide h-full flex-col items-center justify-center p-4">
+        <div id="slide-7" data-title="🌈 Venha fazer parte!" class="slide min-h-full flex-col items-center justify-center p-4">
             <div class="text-center bg-white/50 backdrop-blur-md p-6 sm:p-8 md:p-12 rounded-2xl shadow-2xl w-full max-w-3xl lg:max-w-4xl mx-4">
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-indigo-700 mb-6">🌈 Venha fazer parte!</h2>
                 <p class="text-lg sm:text-xl md:text-2xl leading-relaxed text-slate-700">
@@ -203,9 +232,18 @@
                 </button>
             </div>
         </div>
+
+        <!-- Scroll Hint Animation -->
+        <div id="scroll-hint" class="scroll-hint">
+            <span class="text-white bg-gray-800/50 rounded-full px-3 py-1 text-sm mb-2 shadow-lg">Role para ver</span>
+            <div class="scroll-hint-icon">
+                <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v3.586L7.707 9.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 10.586V7z" clip-rule="evenodd"></path>
+                </svg>
+            </div>
+        </div>
     </main>
 
-    <!-- Rodapé Fixo com Navegação -->
     <footer id="navigation" class="bg-white/70 backdrop-blur-md shadow-inner z-20 p-2 hidden">
         <div class="mx-auto flex items-center justify-center space-x-4">
             <button id="prevBtn" class="bg-white/60 backdrop-blur-sm p-3 rounded-full shadow-lg hover:bg-white transition-transform transform hover:scale-110">
@@ -224,6 +262,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            const mainContent = document.querySelector('main');
             const slides = document.querySelectorAll('.slide');
             const startBtn = document.getElementById('startBtn');
             const restartBtn = document.getElementById('restartBtn');
@@ -233,9 +272,35 @@
             const slideIndicator = document.getElementById('slide-indicator');
             const appHeader = document.getElementById('app-header');
             const slideTitle = document.getElementById('slide-title');
+            const scrollHint = document.getElementById('scroll-hint');
+            let scrollHintVisible = false;
 
             let currentSlide = 0;
-            const totalPresentationSlides = slides.length - 1;
+            const totalPresentationSlides = slides.length - 2; // Ignora o slide 0 e o 1 que não tem rolagem
+
+            function checkScroll() {
+                setTimeout(() => {
+                    const activeSlide = slides[currentSlide];
+                    const content = activeSlide.querySelector(':first-child');
+                    const isScrollable = content.scrollHeight > activeSlide.clientHeight;
+                    const isTargetSlide = currentSlide >= 2 && currentSlide <= 6;
+
+                    if (isScrollable && isTargetSlide) {
+                        scrollHint.classList.add('visible');
+                        scrollHintVisible = true;
+                    } else {
+                        scrollHint.classList.remove('visible');
+                        scrollHintVisible = false;
+                    }
+                }, 300); 
+            }
+
+            mainContent.addEventListener('scroll', () => {
+                if (scrollHintVisible && mainContent.scrollTop > 50) { // Oculta após rolar um pouco
+                    scrollHint.classList.remove('visible');
+                    scrollHintVisible = false;
+                }
+            });
 
             function updateHeader(index) {
                 const slide = document.getElementById(`slide-${index}`);
@@ -247,9 +312,8 @@
             }
 
             function showSlide(index) {
-                slides.forEach(slide => {
-                    slide.classList.remove('active');
-                });
+                mainContent.scrollTop = 0; // Reseta a rolagem ao trocar de slide
+                slides.forEach(slide => slide.classList.remove('active'));
                 const slideToShow = document.getElementById(`slide-${index}`);
                 if (slideToShow) {
                     slideToShow.classList.add('active');
@@ -259,10 +323,11 @@
                     slideIndicator.textContent = `${index} / ${totalPresentationSlides}`;
                 }
                 updateHeader(index);
+                checkScroll();
             }
 
             function next() {
-                if (currentSlide < slides.length - 1) {
+                if (currentSlide < slides.length - 2) {
                     currentSlide++;
                     showSlide(currentSlide);
                 }
@@ -280,7 +345,6 @@
                 showSlide(currentSlide);
                 appHeader.classList.remove('hidden');
                 navigation.classList.remove('hidden');
-                navigation.classList.add('block');
             });
 
             restartBtn.addEventListener('click', () => {
@@ -288,7 +352,6 @@
                 showSlide(currentSlide);
                 appHeader.classList.add('hidden');
                 navigation.classList.add('hidden');
-                navigation.classList.remove('block');
             });
 
             nextBtn.addEventListener('click', next);
@@ -296,11 +359,8 @@
 
             document.addEventListener('keydown', (e) => {
                 if (currentSlide > 0) {
-                    if (e.key === 'ArrowRight') {
-                        next();
-                    } else if (e.key === 'ArrowLeft') {
-                        prev();
-                    }
+                    if (e.key === 'ArrowRight') next();
+                    else if (e.key === 'ArrowLeft') prev();
                 }
             });
 
