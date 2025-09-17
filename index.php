@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Apresentação | Reino em Cristo Kids</title>
+    <title>Apresentação | Reino em Cristo Kids</title>
     <link rel="icon" type="image/png" href="/src/image/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/src/image/favicon.svg" />
     <link rel="shortcut icon" href="/src/image/favicon.ico" />
@@ -27,7 +27,8 @@
         body {
             font-family: 'Poppins', sans-serif;
             overflow: hidden;
-            height: 100vh; /* Fallback for browsers that don't support custom properties or JS */
+            height: 100vh;
+            /* Fallback for browsers that don't support custom properties or JS */
             height: calc(var(--vh, 1vh) * 100);
         }
 
@@ -54,10 +55,13 @@
         }
 
         @keyframes bounce-and-fade {
-            0%, 100% {
+
+            0%,
+            100% {
                 transform: translateY(0);
                 opacity: 0.8;
             }
+
             50% {
                 transform: translateY(-15px);
                 opacity: 1;
@@ -100,7 +104,7 @@
 
     <header id="app-header" class="bg-white/70 backdrop-blur-md shadow-lg z-20 hidden">
         <div class="mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
-            <h1 class="text-xl sm:text-2xl font-bold text-indigo-700">Reino em Cristo Kids</h1>
+            <h1 class="text-xl sm:text-2xl font-bold text-indigo-700 flex items-center"> <img src="/src/image/logo-reino-kids.png" alt="Logo Reino em Cristo Kids" class="h-10 w-10 mr-2"> Apresentação: </h1>
             <h2 id="slide-title" class="text-base sm:text-lg font-semibold text-slate-600 text-right"></h2>
         </div>
     </header>
@@ -312,7 +316,7 @@
                         scrollHint.classList.remove('visible');
                         scrollHintVisible = false;
                     }
-                }, 100); 
+                }, 100);
             }
 
             mainContent.addEventListener('scroll', () => {
