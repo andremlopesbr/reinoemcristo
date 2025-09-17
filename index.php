@@ -159,6 +159,15 @@
                 display: none;
             }
         }
+
+        /* Fix for footer positioning on mobile */
+        #navigation {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000; /* Ensure it's above any modal */
+        }
     </style>
 </head>
 
