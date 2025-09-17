@@ -20,10 +20,15 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        html,
-        body {
-            overflow: hidden;
+        html {
             height: 100%;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            height: 100vh; /* Fallback for browsers that don't support custom properties or JS */
+            height: calc(var(--vh, 1vh) * 100);
         }
 
         main {
@@ -268,6 +273,17 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+            let vh = window.innerHeight * 0.01;
+            // Then we set the value in the --vh custom property to the root of the document
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+            // We listen for the resize event
+            window.addEventListener('resize', () => {
+                // We execute the same code as above
+                let vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--vh', `${vh}px`);
+            });
             const mainContent = document.querySelector('main');
             const slides = document.querySelectorAll('.slide');
             const startBtn = document.getElementById('startBtn');
