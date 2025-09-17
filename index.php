@@ -102,7 +102,7 @@
 
 <body class="bg-gradient-to-br from-sky-200 via-blue-300 to-indigo-400 text-slate-800 flex flex-col h-screen">
 
-    <header id="app-header" class="bg-white/70 backdrop-blur-md shadow-lg z-20 hidden">
+    <header id="app-header" class="bg-white/70 backdrop-blur-md shadow-lg z-20 hidden flex-shrink-0">
         <div class="mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
             <h1 class="text-xl sm:text-2xl font-bold text-indigo-700 flex items-center"> <img src="/src/image/logo-reino-kids.png" alt="Logo Reino em Cristo Kids" class="h-10 w-10 mr-2"> Apresentação: </h1>
             <h2 id="slide-title" class="text-base sm:text-lg font-semibold text-slate-600 text-right"></h2>
@@ -259,7 +259,7 @@
         </div>
     </main>
 
-    <footer id="navigation" class="bg-white/70 backdrop-blur-md shadow-inner z-20 p-2 hidden">
+    <footer id="navigation" class="bg-white/70 backdrop-blur-md shadow-inner z-20 p-2 hidden flex-shrink-0">
         <div class="mx-auto flex items-center justify-center space-x-4">
             <button id="prevBtn" class="bg-white/60 backdrop-blur-sm p-3 rounded-full shadow-lg hover:bg-white transition-transform transform hover:scale-110">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-700">
@@ -367,16 +367,16 @@
             startBtn.addEventListener('click', () => {
                 currentSlide = 1;
                 showSlide(currentSlide);
-                appHeader.style.display = 'flex';
-                navigation.style.display = 'flex';
+                appHeader.classList.remove('hidden');
+                navigation.classList.remove('hidden');
                 console.log('Navigation and Header shown via direct style manipulation.');
             });
 
             restartBtn.addEventListener('click', () => {
                 currentSlide = 0;
                 showSlide(currentSlide);
-                appHeader.style.display = 'none';
-                navigation.style.display = 'none';
+                appHeader.classList.add('hidden');
+                navigation.classList.add('hidden');
                 console.log('Navigation and Header hidden via direct style manipulation.');
             });
 
