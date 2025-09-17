@@ -4,7 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apresentação | Reino em Cristo Kids</title>
+        <title>Apresentação | Reino em Cristo Kids</title>
+    <link rel="icon" type="image/png" href="/src/image/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/src/image/favicon.svg" />
+    <link rel="shortcut icon" href="/src/image/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/src/image/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Ministério Kids" />
+    <link rel="manifest" href="/src/image/site.webmanifest" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
