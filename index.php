@@ -26,10 +26,15 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            overflow: hidden;
-            height: 100vh;
-            /* Fallback for browsers that don't support custom properties or JS */
-            height: calc(var(--vh, 1vh) * 100);
+        }
+
+        @media (max-width: 768px) { /* Apply these styles only on mobile devices */
+            body {
+                overflow: hidden;
+                height: 100vh;
+                /* Fallback for browsers that don't support custom properties or JS */
+                height: calc(var(--vh, 1vh) * 100);
+            }
         }
 
         main {
@@ -70,7 +75,6 @@
 
         .scroll-hint {
             position: absolute;
-            bottom: 6rem;
             left: 50%;
             transform: translateX(-50%);
             z-index: 10;
@@ -86,16 +90,74 @@
             opacity: 1;
         }
 
-        .scroll-hint-icon {
+        .swipe-hint {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%); /* Centraliza verticalmente */
+            z-index: 20;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            pointer-events: none;
+        }
+
+        .swipe-hint.visible {
+            opacity: 1;
+        }
+
+        .swipe-hint.left {
+            left: 20px;
+        }
+
+        .swipe-hint.right {
+            right: 20px;
+        }
+
+        .swipe-hint-icon {
             width: 48px;
             height: 48px;
-            background-color: rgba(26, 32, 44, 0.6);
+            background-color: rgba(26, 32, 44, 0.4); /* Fundo mais sutil */
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            animation: bounce-and-fade 2.5s infinite;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Sombra mais sutil */
+        }
+
+        /* Animations for swipe hints */
+        @keyframes bounce-left {
+            0%, 100% {
+                transform: translateX(0); /* Remove translateY */
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateX(-15px); /* Remove translateY */
+                opacity: 1;
+            }
+        }
+
+        @keyframes bounce-right {
+            0%, 100% {
+                transform: translateX(0); /* Remove translateY */
+                opacity: 0.8;
+            }
+            50% {
+                transform: translateX(15px); /* Remove translateY */
+                opacity: 1;
+            }
+        }
+
+        .swipe-hint.left .swipe-hint-icon {
+            animation: bounce-left 2.5s infinite;
+        }
+
+        .swipe-hint.right .swipe-hint-icon {
+            animation: bounce-right 2.5s infinite;
+        }
+
+        @media (min-width: 769px) {
+            .swipe-hint {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -257,6 +319,24 @@
                 </svg>
             </div>
         </div>
+
+        <!-- Swipe Hint Left -->
+        <div id="swipe-hint-left" class="swipe-hint left">
+            <div class="swipe-hint-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
+                    <path d="m15 18-6-6 6-6" />
+                </svg>
+            </div>
+        </div>
+
+        <!-- Swipe Hint Right -->
+        <div id="swipe-hint-right" class="swipe-hint right">
+            <div class="swipe-hint-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
+                    <path d="m9 18 6-6-6-6" />
+                </svg>
+            </div>
+        </div>
     </main>
 
     <footer id="navigation" class="bg-white/70 backdrop-blur-md shadow-inner z-20 p-2 hidden flex-shrink-0">
@@ -299,7 +379,22 @@
             const appHeader = document.getElementById('app-header');
             const slideTitle = document.getElementById('slide-title');
             const scrollHint = document.getElementById('scroll-hint');
+            const swipeHintLeft = document.getElementById('swipe-hint-left');
+            const swipeHintRight = document.getElementById('swipe-hint-right');
             let scrollHintVisible = false;
+
+            function isMobileDevice() {
+                return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+            }
+
+            function positionScrollHints() {
+                if (isMobileDevice()) {
+                    const footerHeight = navigation.offsetHeight;
+                    scrollHint.style.bottom = `${footerHeight + 20}px`; // 20px above the footer
+                    // swipeHintLeft.style.bottom = `${footerHeight + 20}px`; // Removed, handled by CSS
+                    // swipeHintRight.style.bottom = `${footerHeight + 20}px`; // Removed, handled by CSS
+                }
+            }
 
             let currentSlide = 0;
             const totalPresentationSlides = slides.length - 1; // Total de slides da apresentação (ignora o slide 0)
@@ -309,7 +404,7 @@
                     const isScrollable = mainContent.scrollHeight > mainContent.clientHeight;
                     const isTargetSlide = currentSlide >= 2 && currentSlide <= 6;
 
-                    if (isScrollable && isTargetSlide) {
+                    if (isScrollable && isTargetSlide && isMobileDevice()) { // Added isMobileDevice()
                         scrollHint.classList.add('visible');
                         scrollHintVisible = true;
                     } else {
@@ -317,6 +412,20 @@
                         scrollHintVisible = false;
                     }
                 }, 100);
+            }
+
+            function showSwipeHints() {
+                if (currentSlide > 0 && currentSlide < slides.length -1) { // Show only on presentation slides, not first or last
+                    swipeHintLeft.classList.add('visible');
+                    swipeHintRight.classList.add('visible');
+                    setTimeout(() => {
+                        swipeHintLeft.classList.remove('visible');
+                        swipeHintRight.classList.remove('visible');
+                    }, 2000); // Hide after 2 seconds
+                } else {
+                    swipeHintLeft.classList.remove('visible');
+                    swipeHintRight.classList.remove('visible');
+                }
             }
 
             mainContent.addEventListener('scroll', () => {
@@ -348,6 +457,9 @@
                 }
                 updateHeader(index);
                 checkScroll();
+                if (isMobileDevice()) {
+                    showSwipeHints(); // Call to show swipe hints
+                }
             }
 
             function next() {
