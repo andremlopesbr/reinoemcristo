@@ -1,0 +1,177 @@
+/* Estilos para scrollbar discreto */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* Firefox */
+html {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.3) rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+@media (max-width: 768px) { /* Apply these styles only on mobile devices */
+    body {
+        height: 100vh;
+        /* Fallback for browsers that don't support custom properties or JS */
+        height: calc(var(--vh, 1vh) * 100);
+    }
+}
+
+main {
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+
+.slide {
+    transition: opacity 0.7s ease-in-out, transform 0.7s ease-in-out;
+    opacity: 0;
+    transform: scale(0.98);
+    display: none;
+}
+
+.slide.active {
+    opacity: 1;
+    transform: scale(1);
+    display: flex;
+}
+
+.btn-glow {
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.7), 0 0 10px rgba(147, 197, 253, 0.5);
+}
+
+@keyframes bounce-and-fade {
+
+    0%,
+    100% {
+        transform: translateY(0);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: translateY(-15px);
+        opacity: 1;
+    }
+}
+
+.scroll-hint {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.scroll-hint.visible {
+    opacity: 1;
+}
+
+.swipe-hint {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%); /* Centraliza verticalmente */
+    z-index: 20;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    pointer-events: none;
+}
+
+.swipe-hint.visible {
+    opacity: 1;
+}
+
+.swipe-hint.left {
+    left: 20px;
+}
+
+.swipe-hint.right {
+    right: 20px;
+}
+
+.swipe-hint-icon {
+    width: 48px;
+    height: 48px;
+    background-color: rgba(26, 32, 44, 0.4); /* Fundo mais sutil */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Sombra mais sutil */
+}
+
+/* Animations for swipe hints */
+@keyframes bounce-left {
+    0%, 100% {
+        transform: translateX(0); /* Remove translateY */
+        opacity: 0.8;
+    }
+    50% {
+        transform: translateX(-15px); /* Remove translateY */
+        opacity: 1;
+    }
+}
+
+@keyframes bounce-right {
+    0%, 100% {
+        transform: translateX(0); /* Remove translateY */
+        opacity: 0.8;
+    }
+    50% {
+        transform: translateX(15px); /* Remove translateY */
+        opacity: 1;
+    }
+}
+
+.swipe-hint.left .swipe-hint-icon {
+    animation: bounce-left 2.5s infinite;
+}
+
+.swipe-hint.right .swipe-hint-icon {
+    animation: bounce-right 2.5s infinite;
+}
+
+@media (min-width: 769px) {
+            .swipe-hint {
+                display: none;
+            }
+        }
+
+        /* Fix for footer positioning on mobile */
+        #navigation {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000; /* Ensure it's above any modal */
+        }

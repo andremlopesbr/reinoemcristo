@@ -1,0 +1,29 @@
+{
+  "name": "reinoemcristo",
+  "version": "1.0.0",
+  "description": "Este projeto é uma página de apresentação visual e interativa para o ministério infantil \"Reino em Cristo Kids\" da Igreja Reino em Cristo em Belém/PA.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andremlopesbr/reinoemcristo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/andremlopesbr/reinoemcristo/issues"
+  },
+  "homepage": "https://github.com/andremlopesbr/reinoemcristo#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.0.0"
+  }
+}
