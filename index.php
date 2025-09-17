@@ -12,34 +12,33 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
+        }
+
+        /* Oculta a barra de rolagem principal, mas permite rolagem no main */
+        html,
+        body {
             overflow: hidden;
-            /* Evita a barra de rolagem da página inteira */
+            height: 100%;
+        }
+
+        main {
+            overflow-y: auto;
+            scroll-behavior: smooth;
         }
 
         .slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
             transition: opacity 0.7s ease-in-out, transform 0.7s ease-in-out;
             opacity: 0;
-            transform: scale(0.95);
-            pointer-events: none;
-            /* Desabilita interação com slides escondidos */
-            overflow-y: auto;
-            /* Permite rolagem vertical se o conteúdo for muito alto */
-            padding-top: 1rem;
-            /* Adiciona um respiro no topo */
-            padding-bottom: 5rem;
-            /* Adiciona espaço para o conteúdo não colar no botão de navegação */
+            transform: scale(0.98);
+            display: none;
+            /* Inicia escondido */
         }
 
         .slide.active {
             opacity: 1;
             transform: scale(1);
-            pointer-events: auto;
-            /* Habilita interação com o slide ativo */
+            display: flex;
+            /* Mostra como flexbox quando ativo */
         }
 
         /* Efeito de brilho sutil nos botões */
@@ -49,11 +48,20 @@
     </style>
 </head>
 
-<body class="bg-gradient-to-br from-sky-200 via-blue-300 to-indigo-400 text-slate-800">
+<body class="bg-gradient-to-br from-sky-200 via-blue-300 to-indigo-400 text-slate-800 flex flex-col h-screen">
 
-    <main class="relative w-full h-screen">
+    <!-- Cabeçalho Fixo -->
+    <header id="app-header" class="bg-white/70 backdrop-blur-md shadow-lg z-20 hidden">
+        <div class="mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
+            <h1 class="text-xl sm:text-2xl font-bold text-indigo-700">Reino em Cristo Kids</h1>
+            <h2 id="slide-title" class="text-base sm:text-lg font-semibold text-slate-600 text-right"></h2>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal com Rolagem -->
+    <main class="flex-grow w-full">
         <!-- Slide 0: Tela de Boas-Vindas -->
-        <div id="slide-0" class="slide active flex flex-col items-center justify-center p-4">
+        <div id="slide-0" data-title="Bem-vindos!" class="slide active h-full flex-col items-center justify-center p-4">
             <div class="text-center bg-white/50 backdrop-blur-md p-6 sm:p-8 md:p-12 rounded-2xl shadow-2xl w-full max-w-2xl lg:max-w-3xl mx-4">
                 <h1 class="text-5xl sm:text-6xl md:text-8xl font-bold text-yellow-500 drop-shadow-lg">👑</h1>
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-indigo-700 mt-4">Reino em Cristo Kids</h2>
@@ -65,7 +73,7 @@
         </div>
 
         <!-- Slide 1: Missão -->
-        <div id="slide-1" class="slide flex flex-col items-center justify-center p-4">
+        <div id="slide-1" data-title="🎯 Nossa Missão" class="slide h-full flex-col items-center justify-center p-4">
             <div class="text-center bg-white/50 backdrop-blur-md p-6 sm:p-8 md:p-12 rounded-2xl shadow-2xl w-full max-w-3xl lg:max-w-4xl mx-4">
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-indigo-700 mb-6">🎯 Nossa Missão</h2>
                 <p class="text-lg sm:text-xl md:text-2xl leading-relaxed text-slate-700">
@@ -75,7 +83,7 @@
         </div>
 
         <!-- Slide 2: Visão -->
-        <div id="slide-2" class="slide flex flex-col items-center justify-center p-4">
+        <div id="slide-2" data-title="🌟 Nossa Visão" class="slide h-full flex-col items-center justify-center p-4">
             <div class="bg-white/50 backdrop-blur-md p-6 sm:p-8 md:p-12 rounded-2xl shadow-2xl w-full max-w-4xl lg:max-w-5xl mx-4">
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-indigo-700 mb-8 text-center">🌟 Nossa Visão</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 text-base sm:text-lg text-slate-700">
@@ -92,7 +100,7 @@
         </div>
 
         <!-- Slide 3: Quem Somos -->
-        <div id="slide-3" class="slide flex flex-col items-center justify-center p-4">
+        <div id="slide-3" data-title="🏰 Quem Somos" class="slide h-full flex-col items-center justify-center p-4">
             <div class="bg-white/50 backdrop-blur-md p-6 sm:p-8 md:p-12 rounded-2xl shadow-2xl w-full max-w-4xl lg:max-w-5xl mx-4">
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-indigo-700 mb-6 text-center">🏰 Quem Somos</h2>
                 <p class="text-center text-lg sm:text-xl mb-8 text-slate-700">O Reino em Cristo Kids é mais que um ministério: é uma família espiritual para as crianças da igreja, onde elas:</p>
@@ -107,25 +115,22 @@
         </div>
 
         <!-- Slide 4: Faixas Etárias -->
-        <div id="slide-4" class="slide flex flex-col items-center justify-center p-4">
+        <div id="slide-4" data-title="🧒👧 Faixas Etárias" class="slide h-full flex-col items-center justify-center p-4">
             <div class="bg-white/50 backdrop-blur-md p-6 sm:p-8 md:p-12 rounded-2xl shadow-2xl w-full max-w-5xl lg:max-w-6xl mx-4">
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-indigo-700 mb-8 text-center">🧒👧 Faixas Etárias</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Card 1 -->
                     <div class="bg-sky-100 p-6 rounded-xl text-center border-2 border-sky-300 transform hover:scale-105 transition-transform">
                         <div class="text-5xl mb-3">🐑</div>
                         <h3 class="text-xl font-bold text-sky-800">Jardim do Cordeiro</h3>
                         <p class="font-semibold text-sky-600">4 a 6 anos</p>
                         <p class="text-sm mt-2 text-slate-600">Primeiros passos na fé.</p>
                     </div>
-                    <!-- Card 2 -->
                     <div class="bg-amber-100 p-6 rounded-xl text-center border-2 border-amber-300 transform hover:scale-105 transition-transform">
                         <div class="text-5xl mb-3">⚔️</div>
                         <h3 class="text-xl font-bold text-amber-800">Guerreiros da Fé</h3>
                         <p class="font-semibold text-amber-600">7 a 9 anos</p>
                         <p class="text-sm mt-2 text-slate-600">Fortalecendo a caminhada.</p>
                     </div>
-                    <!-- Card 3 -->
                     <div class="bg-purple-100 p-6 rounded-xl text-center border-2 border-purple-300 transform hover:scale-105 transition-transform">
                         <div class="text-5xl mb-3">🌟</div>
                         <h3 class="text-xl font-bold text-purple-800">Identidade Profética</h3>
@@ -138,7 +143,7 @@
         </div>
 
         <!-- Slide 5: Elementos-Chave -->
-        <div id="slide-5" class="slide flex flex-col items-center justify-center p-4">
+        <div id="slide-5" data-title="🛡️ Elementos-chave" class="slide h-full flex-col items-center justify-center p-4">
             <div class="bg-white/50 backdrop-blur-md p-6 sm:p-8 md:p-12 rounded-2xl shadow-2xl w-full max-w-4xl lg:max-w-5xl mx-4">
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-indigo-700 mb-8 text-center">🛡️ Elementos-chave do Ministério</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 text-base sm:text-lg">
@@ -153,7 +158,7 @@
         </div>
 
         <!-- Slide 6: Frutos Esperados -->
-        <div id="slide-6" class="slide flex flex-col items-center justify-center p-4">
+        <div id="slide-6" data-title="🎁 Frutos Esperados" class="slide h-full flex-col items-center justify-center p-4">
             <div class="bg-white/50 backdrop-blur-md p-6 sm:p-8 md:p-12 rounded-2xl shadow-2xl w-full max-w-5xl lg:max-w-6xl mx-4">
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-indigo-700 mb-8 text-center">🎁 Frutos que Esperamos</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
@@ -186,7 +191,7 @@
         </div>
 
         <!-- Slide 7: Venha fazer parte! -->
-        <div id="slide-7" class="slide flex flex-col items-center justify-center p-4">
+        <div id="slide-7" data-title="🌈 Venha fazer parte!" class="slide h-full flex-col items-center justify-center p-4">
             <div class="text-center bg-white/50 backdrop-blur-md p-6 sm:p-8 md:p-12 rounded-2xl shadow-2xl w-full max-w-3xl lg:max-w-4xl mx-4">
                 <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-indigo-700 mb-6">🌈 Venha fazer parte!</h2>
                 <p class="text-lg sm:text-xl md:text-2xl leading-relaxed text-slate-700">
@@ -200,24 +205,25 @@
         </div>
     </main>
 
-    <!-- Controles de Navegação -->
-    <div id="navigation" class="hidden absolute bottom-5 left-1/2 -translate-x-1/2 flex items-center space-x-4 z-10">
-        <button id="prevBtn" class="bg-white/60 backdrop-blur-sm p-3 rounded-full shadow-lg hover:bg-white transition-transform transform hover:scale-110">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-700">
-                <path d="m15 18-6-6 6-6" />
-            </svg>
-        </button>
-        <div id="slide-indicator" class="text-lg font-semibold text-white bg-black/30 px-3 py-1 rounded-full"></div>
-        <button id="nextBtn" class="bg-white/60 backdrop-blur-sm p-3 rounded-full shadow-lg hover:bg-white transition-transform transform hover:scale-110">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-700">
-                <path d="m9 18 6-6-6-6" />
-            </svg>
-        </button>
-    </div>
+    <!-- Rodapé Fixo com Navegação -->
+    <footer id="navigation" class="bg-white/70 backdrop-blur-md shadow-inner z-20 p-2 hidden">
+        <div class="mx-auto flex items-center justify-center space-x-4">
+            <button id="prevBtn" class="bg-white/60 backdrop-blur-sm p-3 rounded-full shadow-lg hover:bg-white transition-transform transform hover:scale-110">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-700">
+                    <path d="m15 18-6-6 6-6" />
+                </svg>
+            </button>
+            <div id="slide-indicator" class="text-lg font-semibold text-slate-700 bg-black/10 px-3 py-1 rounded-full"></div>
+            <button id="nextBtn" class="bg-white/60 backdrop-blur-sm p-3 rounded-full shadow-lg hover:bg-white transition-transform transform hover:scale-110">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-slate-700">
+                    <path d="m9 18 6-6-6-6" />
+                </svg>
+            </button>
+        </div>
+    </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Seleciona todos os elementos importantes
             const slides = document.querySelectorAll('.slide');
             const startBtn = document.getElementById('startBtn');
             const restartBtn = document.getElementById('restartBtn');
@@ -225,72 +231,70 @@
             const prevBtn = document.getElementById('prevBtn');
             const navigation = document.getElementById('navigation');
             const slideIndicator = document.getElementById('slide-indicator');
+            const appHeader = document.getElementById('app-header');
+            const slideTitle = document.getElementById('slide-title');
 
-            // Define o slide inicial e o total de slides da apresentação real
             let currentSlide = 0;
-            const totalPresentationSlides = slides.length - 1; // Excluindo a tela de boas-vindas
+            const totalPresentationSlides = slides.length - 1;
 
-            // Função para mostrar um slide específico
+            function updateHeader(index) {
+                const slide = document.getElementById(`slide-${index}`);
+                if (slide && slide.dataset.title) {
+                    slideTitle.textContent = slide.dataset.title;
+                } else {
+                    slideTitle.textContent = '';
+                }
+            }
+
             function showSlide(index) {
-                // Esconde todos os slides
                 slides.forEach(slide => {
                     slide.classList.remove('active');
                 });
-                // Mostra o slide no índice desejado
                 const slideToShow = document.getElementById(`slide-${index}`);
                 if (slideToShow) {
                     slideToShow.classList.add('active');
                 }
 
-                // Atualiza o indicador de slides
                 if (index > 0) {
                     slideIndicator.textContent = `${index} / ${totalPresentationSlides}`;
                 }
+                updateHeader(index);
             }
 
-            // Função para ir para o próximo slide
             function next() {
-                // Vai para o próximo slide, mas não ultrapassa o último
                 if (currentSlide < slides.length - 1) {
                     currentSlide++;
                     showSlide(currentSlide);
                 }
             }
 
-            // Função para ir para o slide anterior
             function prev() {
-                // Volta para o slide anterior, mas não antes do primeiro slide da apresentação
                 if (currentSlide > 1) {
                     currentSlide--;
                     showSlide(currentSlide);
                 }
             }
 
-            // Evento para o botão de Iniciar
             startBtn.addEventListener('click', () => {
                 currentSlide = 1;
                 showSlide(currentSlide);
-                // Mostra os controles de navegação
+                appHeader.classList.remove('hidden');
                 navigation.classList.remove('hidden');
-                navigation.classList.add('flex');
+                navigation.classList.add('block');
             });
 
-            // Evento para o botão de Reiniciar
             restartBtn.addEventListener('click', () => {
                 currentSlide = 0;
                 showSlide(currentSlide);
-                // Esconde os controles de navegação
+                appHeader.classList.add('hidden');
                 navigation.classList.add('hidden');
-                navigation.classList.remove('flex');
+                navigation.classList.remove('block');
             });
 
-            // Eventos para os botões de Próximo e Anterior
             nextBtn.addEventListener('click', next);
             prevBtn.addEventListener('click', prev);
 
-            // Navegação com as teclas do teclado (setas)
             document.addEventListener('keydown', (e) => {
-                // Só funciona se a apresentação já tiver começado
                 if (currentSlide > 0) {
                     if (e.key === 'ArrowRight') {
                         next();
@@ -300,7 +304,6 @@
                 }
             });
 
-            // Exibe o primeiro slide (tela de boas-vindas) ao carregar
             showSlide(0);
         });
     </script>
