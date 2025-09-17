@@ -276,13 +276,11 @@
             let scrollHintVisible = false;
 
             let currentSlide = 0;
-            const totalPresentationSlides = slides.length - 2; // Ignora o slide 0 e o 1 que não tem rolagem
+            const totalPresentationSlides = slides.length - 1; // Total de slides da apresentação (ignora o slide 0)
 
             function checkScroll() {
                 setTimeout(() => {
-                    const activeSlide = slides[currentSlide];
-                    const content = activeSlide.querySelector(':first-child');
-                    const isScrollable = content.scrollHeight > activeSlide.clientHeight;
+                    const isScrollable = mainContent.scrollHeight > mainContent.clientHeight;
                     const isTargetSlide = currentSlide >= 2 && currentSlide <= 6;
 
                     if (isScrollable && isTargetSlide) {
@@ -292,7 +290,7 @@
                         scrollHint.classList.remove('visible');
                         scrollHintVisible = false;
                     }
-                }, 300); 
+                }, 100); 
             }
 
             mainContent.addEventListener('scroll', () => {
@@ -327,7 +325,7 @@
             }
 
             function next() {
-                if (currentSlide < slides.length - 2) {
+                if (currentSlide < slides.length - 1) { // Permite ir até o último slide
                     currentSlide++;
                     showSlide(currentSlide);
                 }
